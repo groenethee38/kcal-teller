@@ -4,18 +4,22 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="static/css/style.css">
         <title>Kcal Teller</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
         <header>
-            <button id="home-button" class="header-button-bg active" onclick="changeButton('home-button'); openTab('home')">Home</button>
-            <button id="logs-button" class="header-button-bg" onclick="changeButton('logs-button'); openTab('logs')" >Logs</button>
-            <button id="account-button" class="header-button-bg" onclick="changeButton('account-button'); openTab('account')">Account</button>
+            <div class="header-container">
+                <div id="header-background"></div>
+                <button id="home-button" onclick="changeButton('home-button'); openTab('home')">Home</button>
+                <button id="logs-button" onclick="changeButton('logs-button'); openTab('logs')" >Logs</button>
+                <button id="account-button" onclick="changeButton('account-button'); openTab('account')">Account</button>
+            </div>
         </header>
         
         <div id="home" class="tab-content active">
             <div class="home-grid">
 
-                <div class="grid-item">
+                <div id="grid1" class="grid-item">
                     <div class="suggestion-img-container">
                         <img class="suggestion-img" src="static/css/manti.webp">
                     </div>
@@ -43,25 +47,36 @@
                         </div>
                     </div>
                     <div class="suggestion-bottom">
-                        <button class="primary-button">Zie recept</button>
+                        <button class="alt-button" onclick="">Zie recept</button>
                         <a class="refresh-icon" href=""><img class="refresh-icon" src="static/css/reload.png"></a>
                     </div>
                 </div>
                 
-                <div class="grid-item" onclick="">
+                <div id="grid2" class="grid-item" onclick="">
                     <h1>Nieuwe doel berekenen</h1>
                     <img src="static/css/rekenmachine.png">
                 </div>
 
-                <div class="grid-item">
-                    <h1>Doel: <span class="h1-light">2200 kcal</span></h1>
-                    <a class="icon" href=""><img src="static/css/edit.png"></a>
+                <div id="grid3" class="grid-item">
+                    <h1>Doel: <span class="h1-light"><span id="kcal-doel">2200</span> kcal</span></h1>
+                    <img src="static/css/edit.png" onclick="openDoelEditor()" class="icon">
+                        <div id="pop-up-bg" onclick="closeDoelEditor()">
+                            <div id="kcal-doel-editor-window">
+                                <span id="close-kcal-doel-editor-window" onclick="closeDoelEditor()">&times;</span>
+                                <label>Nieuwe doel</label>
+                                <input id="new-doel">
+                                <button id="save-new-doel">Opslaan</button>
+                            </div>
+                        </div>
                 </div>
                 
-                <div class="grid-item">
+                <div id="grid4" class="grid-item">
+                    <canvas id="progressionChart"></canvas>
+                    <h1 id="kcal-text"></h1>
+                    <h2 id="percentage-text"></h2>
                 </div>
 
-                <div class="grid-item">
+                <div id="grid5" class="grid-item">
                 </div>
             </div>
         </div>

@@ -14,40 +14,43 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
+
 
 header button {
     color: #eeeeee;
-    padding: 9px 28px;
-    margin: 0 15px;
+    width: auto;
+    padding: 9px 50px;
+    margin: 0 40px;
     font-size: 20px;
     text-transform: uppercase;
     background-color: transparent;
     font-weight: 200;
     border: none;
     transition: color 0.2s;
+    display: inline-block;
 }
 
 header button:hover {
     color: #8b8b8b;
 }
 
-.header-button-bg {
-    background-color: none;
-    border-radius: 22px;
-}
-
-.header-button-bg.active {
-    background-color: #1a1a1a;
+#header-background {
+    position: absolute;
+    align-self: center;
+    border-radius: 42px;
+    top: 25px;
+    left: 0px;
+    height: 45px;
+    background: linear-gradient(to right, #510499, #2041B6);
+    transition: transform 0.3s ease;
+    z-index: -1;
 }
 
 h1 {
     color: #fff;
     transition: color 0.3s;
-}
-
-h1:hover {
-    color: red;
 }
 
 h2 {
@@ -79,6 +82,10 @@ a {
     padding: 6px;
 }
 
+.icon:hover {
+    cursor: pointer;
+}
+
 .primary-button {
     height: 44px;
     width: 100%;
@@ -93,7 +100,23 @@ a {
 }
 
 .primary-button:hover {
-    opacity: 0.9;
+    cursor: pointer;
+}
+
+.alt-button {
+    height: 44px;
+    width: 100%;
+    background: linear-gradient(to right, #980ea5, #a85a00);
+    color: #fff;
+    border: none;
+    border-radius: 22px;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 700;
+    word-spacing: 4px;
+}
+
+.alt-button:hover {
     cursor: pointer;
 }
 
@@ -109,7 +132,7 @@ HOME GRID
 }
 
 .grid-item {
-    background-color: #141414;
+    background-color: #0f0f0f;
     color: #fff;
     padding: 20px;
     border-radius: 22px;   
@@ -139,9 +162,7 @@ Grid child 1
     height: 100%;
     transition: transform 0.3s;
 }
-.suggestion-img:hover {
-    transform: scale(1.2);
-}
+
 .suggestion-container {
     padding: 20px;
     padding-bottom: 14px;
@@ -203,7 +224,7 @@ Grid child 3
     justify-content: space-between;
 }
 .grid-item:nth-child(3) h1 {
-    margin: 0 0 0 auto;
+    margin: 0 auto;
     text-transform: uppercase;
 }
 .grid-item:nth-child(3) a {
@@ -220,7 +241,23 @@ Grid child 4
 
 .grid-item:nth-child(4) {
     grid-area: 2 / 2 / 8 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#kcal-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#percentage-text {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+}
+
 
 /* ==============================
 Grid child 5
@@ -228,4 +265,44 @@ Grid child 5
 
 .grid-item:nth-child(5) {
     grid-area: 1 / 4 / 8 / 4;
+}
+
+
+
+
+
+
+/* ==============================
+pop-up window
+============================== */
+
+#pop-up-bg {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px); 
+    z-index: 999;
+}
+
+#kcal-doel-editor-window {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 50%;
+    background-color: #a85a00;
+    z-index: 1000;
+    opacity: 1;
+}
+
+#close-kcal-doel-editor-window {
+    font-size: 44px;
+    cursor: pointer;
 }
