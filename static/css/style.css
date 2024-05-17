@@ -9,6 +9,11 @@ body {
     background-color: #000;
 }
 
+.blurred {
+    filter: blur(6px);
+    z-index: 999;
+}
+
 header {
     padding: 28px;
     display: flex;
@@ -276,7 +281,7 @@ Grid child 5
 pop-up window
 ============================== */
 
-#pop-up-bg {
+#doel-editor-pop-up {
     display: none;
     position: fixed;
     justify-content: center;
@@ -285,24 +290,64 @@ pop-up window
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(6px); 
     z-index: 999;
 }
 
-#kcal-doel-editor-window {
-    display: none;
+#doel-editor {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 50%;
-    width: 50%;
-    background-color: #a85a00;
+    width: 500px;
+    background: linear-gradient(to right, #510499, #2041B6);
     z-index: 1000;
     opacity: 1;
+    padding: 22px;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
 }
 
-#close-kcal-doel-editor-window {
+.doel-editor-top {
+    display: flex;
+}
+
+#close-doel-editor {
     font-size: 44px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+#doel-editor label {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+#new-doel {
+    background-color: #d8d8d8;
+    padding: 13px;
+    border-radius: 9px;
+    border: none;
+    width: 100%;
+    font-size: 26px;
+    margin-bottom: 22px;
+}
+
+#save-new-doel {
+    padding: 12px;
+    text-transform: uppercase;
+    background-color: #000;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    word-spacing: 4px;
+    border: none;
+    border-radius: 22px;
+    height: 44px;
+    width: 50%;
+}
+
+#save-new-doel:hover {
     cursor: pointer;
 }

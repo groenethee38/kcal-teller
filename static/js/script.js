@@ -72,14 +72,22 @@ KCAL Doel pop-up window
 ========================================================================================== */
 
 function openDoelEditor() {
-  document.getElementById("pop-up-bg").style.display = "block";
-  document.getElementById("kcal-doel-editor-window").style.display = "block";
+  document.getElementById("doel-editor-pop-up").style.display = "block";
+  document.querySelector("header").classList.add("blurred");
 }
 
 function closeDoelEditor() {
-  document.getElementById("pop-up-bg").style.display = "none";
-  document.getElementById("kcal-doel-editor-window").style.display = "none";
+  document.getElementById("doel-editor-pop-up").style.display = "none";
+  document.querySelector("header").classList.remove("blurred");
 }
+
+document.addEventListener("click", (event) => {
+  const popup = document.getElementById("doel-editor-pop-up");
+  const header = document.querySelector("header")
+  if (event.target === popup || event.target === header) {
+    closeDoelEditor();
+  }
+})
 
 var newDoel = document.getElementById("new-doel");
 var saveNewDoel = document.getElementById("save-new-doel");
@@ -92,4 +100,5 @@ saveNewDoel.onclick = function() {
   porgressionChart.data.datasets[0].data[0] = percentage;
   porgressionChart.data.datasets[0].data[1] = 100 - percentage;
   porgressionChart.update();
+  closeDoelEditor();
 };

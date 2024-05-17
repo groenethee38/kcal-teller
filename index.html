@@ -60,10 +60,12 @@
                 <div id="grid3" class="grid-item">
                     <h1>Doel: <span class="h1-light"><span id="kcal-doel">2200</span> kcal</span></h1>
                     <img src="static/css/edit.png" onclick="openDoelEditor()" class="icon">
-                        <div id="pop-up-bg" onclick="closeDoelEditor()">
-                            <div id="kcal-doel-editor-window">
-                                <span id="close-kcal-doel-editor-window" onclick="closeDoelEditor()">&times;</span>
-                                <label>Nieuwe doel</label>
+                        <div id="doel-editor-pop-up">
+                            <div id="doel-editor">
+                                <div class="doel-editor-top">
+                                    <label>Nieuwe doel</label>
+                                    <span id="close-doel-editor" onclick="closeDoelEditor()">&times;</span>                                    
+                                </div>
                                 <input id="new-doel">
                                 <button id="save-new-doel">Opslaan</button>
                             </div>
