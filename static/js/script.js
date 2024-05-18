@@ -36,8 +36,8 @@ var percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
 
 const ctx = document.getElementById("progressionChart").getContext('2d');
 const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, '#5e02b4');
-gradient.addColorStop(1, '#1643e4');
+gradient.addColorStop(0, '#14c20e');
+gradient.addColorStop(1, '#00ffb3');
 
 var porgressionChart = new Chart(ctx, {
   type: 'doughnut',
@@ -71,6 +71,9 @@ KCAL Doel pop-up window
 
 ========================================================================================== */
 
+var newDoel = document.getElementById("new-doel");
+var saveNewDoel = document.getElementById("save-new-doel");
+
 function openDoelEditor() {
   document.getElementById("doel-editor-pop-up").style.display = "block";
   document.querySelector("header").classList.add("blurred");
@@ -79,6 +82,7 @@ function openDoelEditor() {
 function closeDoelEditor() {
   document.getElementById("doel-editor-pop-up").style.display = "none";
   document.querySelector("header").classList.remove("blurred");
+  newDoel.value = "";
 }
 
 document.addEventListener("click", (event) => {
@@ -89,16 +93,46 @@ document.addEventListener("click", (event) => {
   }
 })
 
-var newDoel = document.getElementById("new-doel");
-var saveNewDoel = document.getElementById("save-new-doel");
-
 saveNewDoel.onclick = function() {
-  kcalDoel.textContent = newDoel.value;
-  percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
-  var percentageText = document.getElementById("percentage-text");
-  percentageText.textContent = percentage + "%";
-  porgressionChart.data.datasets[0].data[0] = percentage;
-  porgressionChart.data.datasets[0].data[1] = 100 - percentage;
-  porgressionChart.update();
-  closeDoelEditor();
+  if (newDoel.value != NaN) {
+    kcalDoel.textContent = newDoel.value;
+    percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
+    var percentageText = document.getElementById("percentage-text");
+    percentageText.textContent = percentage + "%";
+    porgressionChart.data.datasets[0].data[0] = percentage;
+    porgressionChart.data.datasets[0].data[1] = 100 - percentage;
+    porgressionChart.update();
+    closeDoelEditor();
+  }
 };
+
+/* ==========================================================================================
+
+Add food pop-up window
+
+========================================================================================== */
+
+var productName = document.getElementById("product-name");
+var productWeight = document.getElementById("product-weight");
+var productKcal = document.getElementById("product-kcal");
+
+function openAddFood() {
+  document.getElementById("add-food-pop-up").style.display = "block";
+  document.querySelector("header").classList.add("blurred");
+}
+
+function closeAddFood() {
+  document.getElementById("add-food-pop-up").style.display = "none";
+  document.querySelector("header").classList.remove("blurred");
+  productName.value = "";
+  productWeight.value = "";
+  productKcal.value = "";
+}
+
+document.addEventListener("click", (event) => {
+  const popup = document.getElementById("add-food-pop-up");
+  const header = document.querySelector("header")
+  if (event.target === popup || event.target === header) {
+    closeAddFood();
+  }
+})

@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #000;
+    background: #000
 }
 
 .blurred {
@@ -51,6 +51,7 @@ header button:hover {
     background: linear-gradient(to right, #510499, #2041B6);
     transition: transform 0.3s ease;
     z-index: -1;
+    box-shadow: #1a0270 0px 4px 45px 9px;
 }
 
 h1 {
@@ -94,7 +95,7 @@ a {
 .primary-button {
     height: 44px;
     width: 100%;
-    background: linear-gradient(to right, #4A00A8, #2041B6);
+    background: linear-gradient(to right, #510499, #2041B6);
     color: #fff;
     border: none;
     border-radius: 22px;
@@ -111,13 +112,13 @@ a {
 .alt-button {
     height: 44px;
     width: 100%;
-    background: linear-gradient(to right, #980ea5, #a85a00);
+    background: linear-gradient(to right, #0b7707, #0aad7c);
     color: #fff;
     border: none;
     border-radius: 22px;
     font-size: 22px;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 700;   
     word-spacing: 4px;
 }
 
@@ -137,9 +138,9 @@ HOME GRID
 }
 
 .grid-item {
-    background-color: #0f0f0f;
+    background-color: #1b1b1b;
     color: #fff;
-    padding: 20px;
+    padding: 20px;  
     border-radius: 22px;   
     overflow: hidden;
 }
@@ -212,8 +213,6 @@ Grid child 2
     cursor: pointer;
 }
 
-
-
 .grid-item:nth-child(2) img {
     margin-left: auto;
 }
@@ -241,44 +240,7 @@ Grid child 3
 }
 
 /* ==============================
-Grid child 4
-============================== */
-
-.grid-item:nth-child(4) {
-    grid-area: 2 / 2 / 8 / 4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#kcal-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-
-#percentage-text {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-}
-
-
-/* ==============================
-Grid child 5
-============================== */
-
-.grid-item:nth-child(5) {
-    grid-area: 1 / 4 / 8 / 4;
-}
-
-
-
-
-
-
-/* ==============================
-pop-up window
+doel editor pop-up window
 ============================== */
 
 #doel-editor-pop-up {
@@ -330,7 +292,7 @@ pop-up window
     border-radius: 9px;
     border: none;
     width: 100%;
-    font-size: 26px;
+    font-size: 18px;
     margin-bottom: 22px;
 }
 
@@ -350,4 +312,148 @@ pop-up window
 
 #save-new-doel:hover {
     cursor: pointer;
+}
+
+/* ==============================
+Grid child 4
+============================== */
+
+.grid-item:nth-child(4) {
+    grid-area: 2 / 2 / 8 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#kcal-text {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - width);
+    font-size: 58px;
+}
+
+#percentage-text {
+    position: absolute;
+    top: 60%;
+    left: calc(50% - width);
+    font-size: 38px;
+}
+
+
+/* ==============================
+Grid child 5
+============================== */
+
+.grid-item:nth-child(5) {
+    grid-area: 1 / 4 / 8 / 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid5-title {
+    border-bottom: 1px solid #3a3a3a;
+    padding-bottom: 9px;
+}
+
+.grid5-btn {
+    margin-top: auto;
+    padding: 10px;
+}
+
+#product-list {
+    overflow: auto;
+    padding-right: 15px;
+    margin: 25px 0;
+    padding-top: 6px;
+}
+
+#product {
+    display: flex;
+    padding-bottom: 24px;
+    justify-content: space-between;
+    font-size: 22px;
+}
+
+
+
+/* ==============================
+add food pop up window
+============================== */
+
+#add-food-pop-up {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(6px); 
+    z-index: 999;
+}
+
+#add-food {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background: linear-gradient(to right, #510499, #2041B6);
+    z-index: 1000;
+    opacity: 1;
+    padding: 22px;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-food-top {
+    display: flex;
+    font-size: 55px;
+}
+
+#close-add-food {
+    font-size: 44px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+#add-food label {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+#add-food input {
+    background-color: #d8d8d8;
+    padding: 9px;
+    border-radius: 9px;
+    border: none;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 22px;
+}
+
+#save-add-food {
+    padding: 12px;
+    text-transform: uppercase;
+    background-color: #000;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    word-spacing: 4px;
+    border: none;
+    border-radius: 22px;
+    height: 44px;
+    width: 50%;
+}
+
+#save-add-food:hover {
+    cursor: pointer;
+}
+
+.add-food-title {
+    font-size: 55px;
+    margin-bottom: 12px;
 }
