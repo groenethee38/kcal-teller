@@ -5,6 +5,10 @@
     font-family: sans-serif;
 }
 
+.main-content {
+    display: none;
+}
+
 body {
     background: #000
 }

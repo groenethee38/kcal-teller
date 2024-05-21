@@ -1,6 +1,17 @@
+  
+
+/* ==========================================================================================
+
+tabs
+
+========================================================================================== */
+
+
 document.addEventListener("DOMContentLoaded", function () {
+  var homeButtonOffsetTop = document.getElementById("home-button").offsetTop;
   var homeButtonOffsetLeft = document.getElementById("home-button").offsetLeft;
   var homeButtonWidth = document.getElementById("home-button").offsetWidth;
+  document.getElementById("header-background").style.top = homeButtonOffsetTop + "px";
   document.getElementById("header-background").style.left = homeButtonOffsetLeft + "px";
   document.getElementById("header-background").style.width = homeButtonWidth + "px";
 });
@@ -36,8 +47,8 @@ var percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
 
 const ctx = document.getElementById("progressionChart").getContext('2d');
 const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, '#14c20e');
-gradient.addColorStop(1, '#00ffb3');
+gradient.addColorStop(0, '#96e68a');
+gradient.addColorStop(1, '#22cc08');
 
 var porgressionChart = new Chart(ctx, {
   type: 'doughnut',
@@ -64,6 +75,19 @@ document.addEventListener("DOMContentLoaded", function() {
   var kcalText = document.getElementById("kcal-text");
   kcalText.textContent = kcal + " kcal";
 });
+
+/* ==========================================================================================
+
+Zie recept pop-up window
+
+========================================================================================== */
+
+/* ==========================================================================================
+
+Nieuwe doel berekenen pop-up window
+
+========================================================================================== */
+
 
 /* ==========================================================================================
 
