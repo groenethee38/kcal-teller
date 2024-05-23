@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="static/css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <title>Kcal Teller</title>
+    </head>
+    <body>
+        <div class="">
+            <header>
+                <h1>NAME</h1>
+                <div class="header-container">
+                    <div id="header-background"></div>
+                    <button id="home-button" onclick="changeButton('home-button'); openTab('home')">Home</button>
+                    <button id="logs-button" onclick="changeButton('logs-button'); openTab('logs')" >Logs</button>
+                    <button id="account-button" onclick="changeButton('account-button'); openTab('account')">Account</button>
+                </div>
+            </header>
+            <div id="home" class="tab-content active">
+                <div class="home-grid">
+
+                    <div id="grid1" class="grid-item">
+                        <div class="suggestion-img-container">
+                            <img class="suggestion-img" src="static/css/manti.webp">
+                        </div>
+                        <div class="suggestion-container">
+                            <h1>Manti</h1>
+                            <p>340kcal<br>per portie (130gr)</p>
+                            <div class="suggestion-list">
+                                <ul>
+                                    <li>Deeg</li>
+                                    <li>Water</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="suggestion-bottom">
+                            <button class="primary-button" onclick="">Zie recept</button>
+                            <a class="refresh-icon" href=""><img class="refresh-icon" src="static/css/reload.png"></a>
+                        </div>
+                    </div>
+                    
+                    <div id="grid2" class="grid-item" onclick="">
+                        <h1>Nieuwe doel berekenen</h1>
+                        <img src="static/css/rekenmachine.png">
+                    </div>
+
+                    <div id="grid3" class="grid-item">
+                        <h1>Doel: <span class="h1-light"><span id="kcal-doel">2200</span> kcal</span></h1>
+                        <img src="static/css/edit.png" onclick="openDoelEditor()" class="icon">
+                            <div id="doel-editor-pop-up">
+                                <div id="doel-editor">
+                                    <div class="doel-editor-top">
+                                        <label>Nieuwe doel</label>
+                                        <span id="close-doel-editor" onclick="closeDoelEditor()">&times;</span>                                    
+                                    </div>
+                                    <input id="new-doel">
+                                    <button id="save-new-doel">Opslaan</button>
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div id="grid4" class="grid-item">
+                        <canvas id="progressionChart"></canvas>
+                        <h1 id="kcal-text"></h1>
+                        <h2 id="percentage-text"></h2>
+                    </div>
+
+                    <div id="grid5" class="grid-item">
+                        <h1 class="grid5-title">Vandaag</h1>
+                            <div id="product-list">
+                                <div id="product">
+                                    <p id="name"></p>
+                                    <p id="weight"></p>
+                                    <p id="kcal"></p>
+                                </div>
+                            </div>
+                        <button class="primary-button grid5-btn" onclick="openAddFood()">Voeg toe</button>
+                        <div id="add-food-pop-up">
+                            <div id="add-food">
+                                <div class="add-food-top">
+                                    <h1 class="add-food-title">Product</h1>
+                                    <span id="close-add-food" onclick="closeAddFood()">&times;</span>
+                                </div>
+                                <label>Naam</label>
+                                <input id="product-name">
+                                <label>Gewicht (gr)</label>
+                                <input id="product-weight">
+                                <label>Kcal</label>
+                                <input id="product-kcal">
+                                <button id="save-add-food">Opslaan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="logs" class="tab-content">
+                <h1>page 2</h1>
+            </div>
+            
+            <div id="account" class="tab-content">
+                <h1>page 3</h1>
+            </div>
+        </div>
+        <script src="static/js/main.js"></script>
+    </body>
+</html>
