@@ -47,8 +47,8 @@ var percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
 
 const ctx = document.getElementById("progressionChart").getContext('2d');
 const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, '#96e68a');
-gradient.addColorStop(1, '#22cc08');
+gradient.addColorStop(0, '#510499');
+gradient.addColorStop(1, '#2041B6');
 
 var porgressionChart = new Chart(ctx, {
   type: 'doughnut',
@@ -100,18 +100,15 @@ var saveNewDoel = document.getElementById("save-new-doel");
 
 function openDoelEditor() {
   document.getElementById("doel-editor-pop-up").style.display = "block";
-  document.querySelector("header").classList.add("blurred");
 }
 
 function closeDoelEditor() {
   document.getElementById("doel-editor-pop-up").style.display = "none";
-  document.querySelector("header").classList.remove("blurred");
   newDoel.value = "";
 }
 
 document.addEventListener("click", (event) => {
   const popup = document.getElementById("doel-editor-pop-up");
-  const header = document.querySelector("header")
   if (event.target === popup || event.target === header) {
     closeDoelEditor();
   }
@@ -142,12 +139,10 @@ var productKcal = document.getElementById("product-kcal");
 
 function openAddFood() {
   document.getElementById("add-food-pop-up").style.display = "block";
-  document.querySelector("header").classList.add("blurred");
 }
 
 function closeAddFood() {
   document.getElementById("add-food-pop-up").style.display = "none";
-  document.querySelector("header").classList.remove("blurred");
   productName.value = "";
   productWeight.value = "";
   productKcal.value = "";
@@ -155,7 +150,6 @@ function closeAddFood() {
 
 document.addEventListener("click", (event) => {
   const popup = document.getElementById("add-food-pop-up");
-  const header = document.querySelector("header")
   if (event.target === popup || event.target === header) {
     closeAddFood();
   }
