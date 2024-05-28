@@ -6,16 +6,19 @@
 }
 
 .main-content {
-    display: none;
+    scale: 1.0;
 }
 
 body {
     background-image: url("wallpaper.jpg");
 }
 
-.glassy-bg {
-    background: #e6e6e62c;
-    backdrop-filter: blur(10px);
+.transparent-header-bg {
+    background: rgba(255, 255, 255, 0.7)
+}
+
+.white-bg {
+    background: #fff;
 }
 
 header {
@@ -24,16 +27,24 @@ header {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background: #e6e6e62c;
+}
+
+.header-container {
+    padding: 12px;
+    border-radius: 42px;
+    background: rgba(255, 255, 255, 0.384);
     backdrop-filter: blur(10px);
 }
 
+header h1 {
+    color: #fff;
+}
 
 header button {
-    color: #000000;
+    color: #ffffff;
     width: auto;
     padding: 9px 50px;
-    margin: 0 40px;
+    margin: 0 0;
     font-size: 20px;
     text-transform: uppercase;
     background-color: transparent;
@@ -54,7 +65,7 @@ header button:hover {
     top: 25px;
     left: 0px;
     height: 45px;
-    background: #ffffff;
+    background: #1a0e8f;
     transition: transform 0.3s ease;
     z-index: -1;
     box-shadow: #303030 0px 4px 12px;
@@ -140,8 +151,8 @@ HOME GRID
 .home-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(7, 100px);
-    grid-gap: 18px;
+    grid-template-rows: repeat(7, 90px);
+    grid-gap: 24px;
     scale: 0.9;
 }
 
@@ -151,6 +162,7 @@ HOME GRID
     padding: 20px;  
     border-radius: 22px;   
     overflow: hidden;
+    box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 
@@ -164,6 +176,7 @@ Grid child 1
     display: flex;
     flex-direction: column;
     height: 100%;
+    background: transparent;
 }
 .suggestion-img-container {
     min-height: 25%;
@@ -172,12 +185,11 @@ Grid child 1
 }
 
 .grid-item:nth-child(1) p {
-    color: #535353;
+    color: #353535;
 }
 
 .suggestion-title {
     padding: 20px;
-    background: #e0ecfa;
 }
 
 .suggestion-img {
@@ -228,12 +240,17 @@ Grid child 2
     display: flex;
     align-items: center;
     cursor: pointer;
-    background: #e6e6e65e;
-    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur(10);
+    border: 1px solid rgba(255, 255, 255, 0.199);
 }
 
 .grid-item:nth-child(2) img {
     margin-left: auto;
+}
+
+.grid-item:nth-child(2) h1 {
+    color: #fff;
 }
 
 /* ==============================
@@ -368,11 +385,10 @@ Grid child 5
     display: flex;
     flex-direction: column;
     padding: 0;
+    background: transparent;
 }
 
 .grid5-title {
-    background: #e0ecfa;
-    padding-bottom: 20px;
     padding: 20px;
 }
 
@@ -381,6 +397,7 @@ Grid child 5
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    background-color: #fff;
 }
 
 .grid5-btn {

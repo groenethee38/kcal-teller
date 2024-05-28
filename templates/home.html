@@ -32,9 +32,8 @@
                 <button id="save-add-food">Opslaan</button>
             </div>
         </div>
-        <div class="">
+        <div class="main-content">
             <header>
-                <h1>NAME</h1>
                 <div class="header-container">
                     <div id="header-background"></div>
                     <button id="home-button" onclick="changeButton('home-button'); openTab('home');">Home</button>
@@ -45,30 +44,32 @@
             <div id="home" class="tab-content active">
                 <div class="home-grid">
                     <div id="grid1" class="grid-item">
-                        <div class="suggestion-title">
+                        <div class="transparent-header-bg suggestion-title">
                             <h1>Voorstel</h1>
                         </div>
-                        <div class="suggestion-img-container">
-                            <img class="suggestion-img" src="static/css/manti.webp">
-                        </div>
-                        <div class="suggestion-container">
-                            <h1>Manti</h1>
-                            <p>340kcal<br>per portie (130gr)</p>
-                            <div class="suggestion-list">
-                                <ul>
-                                    <li>Deeg</li>
-                                    <li>Water</li>
-                                    <li>Deeg</li>
-                                    <li>Water</li>
-                                    <li>Deeg</li>
-                                    <li>Water</li>                  
-                                </ul>
+                        <span class="white-bg">
+                            <div class="suggestion-img-container">
+                                <img class="suggestion-img" src="static/css/manti.webp">
                             </div>
-                        </div>
-                        <div class="suggestion-bottom">
-                            <button class="primary-button" onclick="">Zie recept</button>
-                            <a class="refresh-icon" href=""><img class="refresh-icon" src="static/css/reload.png"></a>
-                        </div>
+                            <div class="suggestion-container">
+                                <h1>Manti</h1>
+                                <p>340kcal<br>per portie (130gr)</p>
+                                <div class="suggestion-list">
+                                    <ul>
+                                        <li>Deeg</li>
+                                        <li>Water</li>
+                                        <li>Deeg</li>
+                                        <li>Water</li>
+                                        <li>Deeg</li>
+                                        <li>Water</li>                  
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="suggestion-bottom">
+                                <button class="primary-button" onclick="">Zie recept</button>
+                                <a class="refresh-icon" href=""><img class="refresh-icon" src="static/css/reload.png"></a>
+                            </div>
+                        </span>
                     </div>
 
                     <div id="grid2" class="grid-item" onclick="">
@@ -88,7 +89,9 @@
                     </div>
 
                     <div id="grid5" class="grid-item">
-                        <h1 class="grid5-title">Vandaag</h1>
+                        <span class="transparent-header-bg">
+                            <h1 class="grid5-title">Vandaag</h1>
+                        </span>
                         <div class="grid5-bottom">
                             <div id="product-list">
                                 <div id="product">
