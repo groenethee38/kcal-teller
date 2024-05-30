@@ -55,7 +55,7 @@ header button {
 }
 
 header button:hover {
-    color: #8b8b8b;
+    color: #c0c0c0;
 }
 
 #header-background {
@@ -162,7 +162,7 @@ HOME GRID
     padding: 20px;  
     border-radius: 22px;   
     overflow: hidden;
-    box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 
