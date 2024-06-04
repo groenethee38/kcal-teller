@@ -4,18 +4,21 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="static/css/style.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <title>Kcal Teller</title>
     </head>
     <body>
         <div id="doel-editor-pop-up">
-            <div id="doel-editor">
+            <form id="doel-editor" action="{{ url_for('edit-doel')}}" method="post">
                 <div class="doel-editor-top">
                     <label>Nieuwe doel</label>
                     <span id="close-doel-editor" onclick="closeDoelEditor()">&times;</span>                                    
                 </div>
-                <input id="new-doel">
-                <button id="save-new-doel">Opslaan</button>
-            </div>
+                <input id="new-doel" type="text">
+                <button id="save-new-doel" type="submit">Opslaan</button>
+            </form>
         </div>
         <div id="add-food-pop-up">
             <div id="add-food">
@@ -34,42 +37,21 @@
         </div>
         <div class="main-content">
             <header>
+                <h1>Welkom, {{ user.username }}</h1>
+                <p>Email: {{ user.email }}</p>
+                <p></p>
                 <div class="header-container">
                     <div id="header-background"></div>
                     <button id="home-button" onclick="changeButton('home-button'); openTab('home');">Home</button>
                     <button id="logs-button" onclick="changeButton('logs-button'); openTab('logs')" >Logs</button>
                     <button id="account-button" onclick="changeButton('account-button'); openTab('account')">Account</button>
                 </div>
+                <a href="{{ url_for('logout') }}">Logout</a>
             </header>
             <div id="home" class="tab-content active">
                 <div class="home-grid">
                     <div id="grid1" class="grid-item">
-                        <div class="transparent-header-bg suggestion-title">
-                            <h1>Voorstel</h1>
-                        </div>
-                        <span class="white-bg">
-                            <div class="suggestion-img-container">
-                                <img class="suggestion-img" src="static/css/manti.webp">
-                            </div>
-                            <div class="suggestion-container">
-                                <h1>Manti</h1>
-                                <p>340kcal<br>per portie (130gr)</p>
-                                <div class="suggestion-list">
-                                    <ul>
-                                        <li>Deeg</li>
-                                        <li>Water</li>
-                                        <li>Deeg</li>
-                                        <li>Water</li>
-                                        <li>Deeg</li>
-                                        <li>Water</li>                  
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="suggestion-bottom">
-                                <button class="primary-button" onclick="">Zie recept</button>
-                                <a class="refresh-icon" href=""><img class="refresh-icon" src="static/css/reload.png"></a>
-                            </div>
-                        </span>
+                        
                     </div>
 
                     <div id="grid2" class="grid-item" onclick="">
