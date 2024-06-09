@@ -1,12 +1,3 @@
-  
-
-/* ==========================================================================================
-
-tabs
-
-========================================================================================== */
-
-
 document.addEventListener("DOMContentLoaded", function () {
   var homeButtonOffsetTop = document.getElementById("home-button").offsetTop;
   var homeButtonOffsetLeft = document.getElementById("home-button").offsetLeft;
@@ -14,67 +5,67 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("header-background").style.top = homeButtonOffsetTop + "px";
   document.getElementById("header-background").style.left = homeButtonOffsetLeft + "px";
   document.getElementById("header-background").style.width = homeButtonWidth + "px";
+
+  var kcalDoel = document.getElementById("kcal-doel");
+  if (kcalDoel && kcalDoel.textContent !== 'None') {
+      var kcal = 1300;
+      var percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
+
+      const ctx = document.getElementById("progressionChart").getContext('2d');
+      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, '#510499');
+      gradient.addColorStop(1, '#2041B6');
+
+      var progressionChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+              datasets: [{
+                  data: [percentage, 100 - percentage],
+                  backgroundColor:  [gradient, 'transparent'],
+                  borderWidth: 0
+              }]
+          },
+          options: {
+              cutout: '85%',
+              responsive: true,
+              plugins: {
+                  tooltip: { enabled: false },
+                  legend: { display: false },
+              }
+          }
+      });
+
+      var percentageText = document.getElementById("percentage-text");
+      percentageText.textContent = percentage + "%";
+      var kcalText = document.getElementById("kcal-text");
+      kcalText.textContent = kcal + " kcal";
+  } else {
+      console.error("kcal-doel element not found or its content is None.");
+  }
 });
 
+
+/*--- Tabs ------------------------------*/
+
 function changeButton(buttonName) {
-    var homeButtonOffsetLeft = document.getElementById("home-button").offsetLeft;
-    var offsetLeft = document.getElementById(buttonName).offsetLeft;
-    var buttonWidth = document.getElementById(buttonName).offsetWidth;
-    document.getElementById("header-background").style.transform = "translateX(" + (offsetLeft - homeButtonOffsetLeft) + "px)";
-    document.getElementById("header-background").style.width = buttonWidth + "px";
+  var homeButtonOffsetLeft = document.getElementById("home-button").offsetLeft;
+  var offsetLeft = document.getElementById(buttonName).offsetLeft;
+  var buttonWidth  =  document.getElementById(buttonName).offsetWidth;
+  document.getElementById("header-background").style.transform = "translateX(" + (offsetLeft - homeButtonOffsetLeft) + "px)";
+  document.getElementById("header-background").style.width = buttonWidth + "px";
 }
 
 function openTab(tabName) {
   var i, tabContent;
   tabContent = document.getElementsByClassName("tab-content");
-  for (i = 0; i < tabContent.length; i++) {
+  for (i = 0; i <tabContent.length; i++) {
     tabContent[i].classList.remove("active");
     if (tabContent[i].id === tabName) {
       tabContent[i].classList.add("active");
-    }
+    } 
   }
 }
 
-/* ==========================================================================================
-
-Chart
-
-========================================================================================== */
-
-var kcalDoel = document.getElementById("kcal-doel");
-var kcal = 1300;
-var percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
-
-const ctx = document.getElementById("progressionChart").getContext('2d');
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, '#510499');
-gradient.addColorStop(1, '#2041B6');
-
-var porgressionChart = new Chart(ctx, {
-  type: 'doughnut',
-  data: {
-    datasets: [{
-      data: [percentage, 100 - percentage],
-      backgroundColor:  [gradient, 'transparent'],
-      borderWidth: 0
-    }]
-  },
-  options: {
-    cutout: '85%',
-    responsive: true,
-    plugins: {
-      tooltip: { enabled: false },
-      legend: { display: false },
-    }
-  }
-})
-
-document.addEventListener("DOMContentLoaded", function() {
-  var percentageText = document.getElementById("percentage-text");
-  percentageText.textContent = percentage + "%";
-  var kcalText = document.getElementById("kcal-text");
-  kcalText.textContent = kcal + " kcal";
-});
 
 /* ==========================================================================================
 
@@ -109,7 +100,7 @@ function closeDoelEditor() {
 
 document.addEventListener("click", (event) => {
   const popup = document.getElementById("doel-editor-pop-up");
-  if (event.target === popup || event.target === header) {
+  if (event.target === popup) {
     closeDoelEditor();
   }
 })
@@ -150,7 +141,7 @@ function closeAddFood() {
 
 document.addEventListener("click", (event) => {
   const popup = document.getElementById("add-food-pop-up");
-  if (event.target === popup || event.target === header) {
+  if (event.target === popup) {
     closeAddFood();
   }
-})
+})  

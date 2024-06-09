@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="static/css/style.css">
+        <title>Registreer</title>
+    </head>
+    <body>
+        <div class="">
+            <a href="{{ url_for('login') }}">Terug</a>
+            <h1>Creëer je account<h1>
+            <form method="POST">
+                <input name="username" id="username" placeholder="Username" required>
+                <input name="password" id="password" placeholder="Wachtwoord" required>
+                <input name="email" id="email" placeholder="Email" required>
+                <button type="submit">Registreer</button>
+            </form>
+        </div>
+    </body>
+</html>
