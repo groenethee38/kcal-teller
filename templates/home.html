@@ -11,9 +11,9 @@
 </head>
 <body>
     <div id="doel-editor-pop-up">
-        <form id="doel-editor" action="{{ url_for('edit_doel')}}" method="post">
+        <form id="doel-editor" action="{{ url_for('edit_doel') }}" method="post">
             <div class="doel-editor-top">
-                <label>Nieuwe doel</label>
+                <h1>Nieuwe doel</h1>
                 <span id="close-doel-editor" onclick="closeDoelEditor()">&times;</span>                                    
             </div>
             <input name="new-doel" id="new-doel" type="text">
@@ -26,26 +26,33 @@
                 <h1 class="add-food-title">Product</h1>
                 <span id="close-add-food" onclick="closeAddFood()">&times;</span>
             </div>
-            <label>Naam</label>
-            <input id="product-name">
-            <label>Gewicht (gr)</label>
-            <input id="product-weight">
-            <label>Kcal</label>
-            <input id="product-kcal">
-            <button id="save-add-food">Opslaan</button>
+            <form action="{{ url_for('add_food') }}" method="post">
+                <label for="product-name">Naam</label>
+                <input name="product-name" id="product-name">
+                <label for="product-weight">Gewicht (gr)</label>
+                <input name="product-weight" id="product-weight">
+                <label for="product-kcal">Kcal</label>
+                <input name="product-kcal" id="product-kcal">
+                <button id="save-add-food">Opslaan</button>
+            </form>
         </div>
     </div>
     <div class="main-content">
         <header>
-            <h1>Welkom, {{ user.username }}</h1>
-            <p>Email: {{ user.email }}</p>
-            <div class="header-container">
-                <div id="header-background"></div>
-                <button id="home-button" onclick="changeButton('home-button'); openTab('home');">Home</button>
-                <button id="logs-button" onclick="changeButton('logs-button'); openTab('logs')" >Logs</button>
-                <button id="account-button" onclick="changeButton('account-button'); openTab('account')">Account</button>
+            <div class="header-left">
+                <h1>Hallo {{ user.username }}</h1>
             </div>
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <div class="header-center">
+                <div class="header-center-content">
+                    <div id="header-background"></div>
+                    <button id="home-button" onclick="changeButton('home-button'); openTab('home');">Home</button>
+                    <button id="logs-button" onclick="changeButton('logs-button'); openTab('logs')" >Logs</button>
+                    <button id="account-button" onclick="changeButton('account-button'); openTab('account')">Account</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <a id="logout" href="{{ url_for('logout') }}">Uitloggen</a>
+            </div>
         </header>
         <div id="home" class="tab-content active">
             <div class="home-grid">
@@ -69,11 +76,13 @@
                     </span>
                     <div class="grid5-bottom">
                         <div id="product-list">
+                            {% for food in food_logs %}
                             <div id="product">
-                                <p id="name"></p>
-                                <p id="weight"></p>
-                                <p id="kcal"></p>
+                                <p id="name">{{ food.name }}</p>
+                                <p id="weight">{{ food.weight }}</p>
+                                <p id="kcal">{{ food.kcal }}</p>
                             </div>
+                            {% endfor %}
                         </div>
                         <button class="primary-button grid5-btn" onclick="openAddFood()">Voeg toe</button>
                     </div>

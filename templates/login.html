@@ -10,10 +10,10 @@
             <h1>Login</h1>
             <form method="POST">
                 <input name="username" id="username" placeholder="Username">
-                <input name="password" id="password" placeholder="Wachtwoord">
+                <input name="password" type="password" id="password" placeholder="Wachtwoord">
                 <button>Login</button>
             </form>
-            <a href="{{ url_for('register') }}">Maak een account aan</a>
+            <a class="new-account-button" href="{{ url_for('register') }}">Maak een account aan</a>
         </div>
     </body>
 </html>

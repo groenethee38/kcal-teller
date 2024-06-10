@@ -25,11 +25,26 @@ header {
     padding: 28px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-.header-container {
+.header-left {
+    flex: 1;
+    overflow: hidden;
+}
+.header-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+.header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-center-content {
     border-radius: 42px;
     height: 45px;
     background: rgba(32, 34, 151, 0.705);
@@ -38,6 +53,15 @@ header {
 
 header h1 {
     color: #fff;
+}
+
+#logout {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+}
+#logout:hover {
+    opacity: 0.6;
 }
 
 header button {
@@ -55,8 +79,8 @@ header button {
 }
 
 header button:hover {
-    text-decoration: underline;
     cursor: pointer;
+    opacity: 0.6;
 }
 
 #header-background {
@@ -125,19 +149,6 @@ a {
 
 .primary-button:hover {
     cursor: pointer;
-}
-
-.alt-button {
-    height: 44px;
-    width: 100%;
-    background: linear-gradient(to right, #0b7707, #0aad7c);
-    color: #000000;
-    border: none;
-    border-radius: 22px;
-    font-size: 22px;
-    text-transform: uppercase;
-    font-weight: 600;   
-    word-spacing: 4px;
 }
 
 .alt-button:hover {
@@ -485,7 +496,7 @@ add food pop up window
 }
 
 .login-page button {
-    width: 35%;
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border-radius: 99px;
@@ -496,5 +507,72 @@ add food pop up window
 
 .login-page button:hover {
     cursor: pointer;
+    opacity: 0.6;
+}
+
+.new-account-button {
+    padding: 12px;
+    margin-top: auto;
+    color: #7229e7;
+    font-size: 18px;
+}
+
+.new-account-button:hover {
+    opacity: 0.6;
+}
+
+
+
+/* REGISTER PAGE
+*/
+
+.register-page {
+    height: 450px;
+    width: 325px;
+    background-color: #fff;
+    border-radius: 22px;
+    padding: 14px;
+    margin: auto;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.register-page h1 {
+    margin-bottom: 15px;
+}
+
+.register-page input {
+    width: 100%;
+    margin-bottom: 18px;
+    border: none;
+    background-color: #d4d4d4;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.register-page button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 99px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+}
+
+.register-page button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.terug {
+    margin-right: auto;
+    margin-bottom: 34px;
+    color: #7229e7;
+}
+.terug:hover {
     opacity: 0.6;
 }

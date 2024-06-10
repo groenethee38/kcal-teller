@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
@@ -13,13 +14,26 @@ class User(db.Model):
     password = db.Column(db.String(150), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     doel = db.Column(db.Integer, nullable=True)
+    food_logs = db.relationship('FoodLog', backref='user', lazy=True)
+
+class FoodLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    name = db.Column(db.String(150), nullable=False)
+    weight = db.Column(db.Float, nullable=False)
+    kcal = db.Column(db.Float, nullable=False)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 @app.route('/')
 def home():
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
-        print(user.doel)
-        return render_template('home.html', user=user)
+        if user is None:
+            session.pop('user_id', None)
+            return redirect(url_for('login'))
+        food_logs = FoodLog.query.filter_by(user_id=user.id).all()
+        return render_template('home.html', user=user, food_logs=food_logs)
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -69,6 +83,25 @@ def edit_doel():
         return redirect(url_for('home'))
 
     return redirect(url_for('home'))
+
+@app.route('/add-food', methods=['GET', 'POST'])
+def add_food():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        name = request.form['product-name']
+        weight = request.form['product-weight']
+        kcal = request.form['product-kcal']
+        user_id = session['user_id']
+
+        new_food = FoodLog(name=name, weight=weight, kcal=kcal, user_id=user_id)
+        db.session.add(new_food)
+        db.session.commit()
+
+        return redirect(url_for('home'))
+    
+    return render_template('home.html')
 
 if __name__ == "__main__":
     with app.app_context():
