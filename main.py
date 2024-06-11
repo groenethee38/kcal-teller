@@ -103,6 +103,20 @@ def add_food():
     
     return render_template('home.html')
 
+@app.route('/delete-food/<int:food_id>', methods=['POST'])
+def delete_food(food_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    food = FoodLog.query.get_or_404(food_id)
+    if food.user_id != session['user_id']:
+        return redirect(url_for('home'))
+
+    db.session.delete(food)
+    db.session.commit()
+    flash('Verwijderd')
+    return redirect(url_for('home'))
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()

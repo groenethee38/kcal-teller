@@ -81,6 +81,9 @@
                                 <p id="name">{{ food.name }}</p>
                                 <p id="weight">{{ food.weight }}</p>
                                 <p id="kcal">{{ food.kcal }}</p>
+                                <form action="{{ url_for('delete_food', food_id=food.id) }}" method="POST" style="margin: 0;">
+                                    <button type="submit" class="delete-button">X</button>
+                                </form>
                             </div>
                             {% endfor %}
                         </div>
