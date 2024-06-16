@@ -33,7 +33,8 @@ def home():
             session.pop('user_id', None)
             return redirect(url_for('login'))
         food_logs = FoodLog.query.filter_by(user_id=user.id).all()
-        return render_template('home.html', user=user, food_logs=food_logs)
+        total_kcal = sum(food.kcal for food in food_logs)
+        return render_template('home.html', user=user, food_logs=food_logs, total_kcal=total_kcal)
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])

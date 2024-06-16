@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var kcalDoel = document.getElementById("kcal-doel");
   if (kcalDoel && kcalDoel.textContent !== 'None') {
-      var kcal = 1300;
+      var kcal = totalKcal;
       var percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
 
       const ctx = document.getElementById("progressionChart").getContext('2d');
