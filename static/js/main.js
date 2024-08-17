@@ -7,40 +7,67 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("header-background").style.width = homeButtonWidth + "px";
 
   var kcalDoel = document.getElementById("kcal-doel");
-  if (kcalDoel && kcalDoel.textContent !== 'None') {
-      var kcal = totalKcal;
-      var percentage = (100 / kcalDoel.textContent * kcal).toFixed(0);
+  var kcalText = document.getElementById("kcal-text");
+  var percentageText = document.getElementById("percentage-text");
+  var ctx = document.getElementById("progressionChart").getContext('2d');
+  var progressionChart = null;
 
-      const ctx = document.getElementById("progressionChart").getContext('2d');
-      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-      gradient.addColorStop(0, '#510499');
-      gradient.addColorStop(1, '#2041B6');
+  function initializeChart() {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, '#510499');
+    gradient.addColorStop(1, '#2041B6');
 
-      var progressionChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-              datasets: [{
-                  data: [percentage, 100 - percentage],
-                  backgroundColor:  [gradient, 'transparent'],
-                  borderWidth: 0
-              }]
-          },
-          options: {
-              cutout: '85%',
-              responsive: true,
-              plugins: {
-                  tooltip: { enabled: false },
-                  legend: { display: false },
-              }
-          }
-      });
+    progressionChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [0, 100],
+          backgroundColor: [gradient, 'transparent'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '85%',
+        responsive: true,
+        plugins: {
+          tooltip: { enabled: false },
+          legend: { display: false },
+        }
+      }
+    });
+  }
 
-      var percentageText = document.getElementById("percentage-text");
+  function updateChart(kcal) {
+    if (kcalDoel && kcalDoel.textContent !== 'None') {
+      var targetKcal = parseInt(kcalDoel.textContent, 10);
+      var percentage = (100 / targetKcal * kcal).toFixed(0);
+
+      if (progressionChart) {
+      progressionChart.data.datasets[0].data[0] = percentage;
+      progressionChart.data.datasets[0].data[1] = 100 - percentage;
+      progressionChart.update();
+      } else {
+      initializeChart();
+      progressionChart.data.datasets[0].data[0] = percentage;
+      progressionChart.data.datasets[0].data[1] = 100 - percentage;
+      progressionChart.update();
+      }
+      
       percentageText.textContent = percentage + "%";
-      var kcalText = document.getElementById("kcal-text");
       kcalText.textContent = kcal + " kcal";
-  } else {
-      console.error("kcal-doel element not found or its content is None.");
+    } else {
+        console.error("kcal-doel element not found or its content is None.");
+    }
+  }
+
+  changeDay = function(date, kcal) {
+    totalKcal = kcal;
+    updateChart(totalKcal);
+  }
+
+  if (totalKcal) {
+    initializeChart();
+    updateChart(totalKcal);
   }
 });
 

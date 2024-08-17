@@ -10,11 +10,13 @@
 }
 
 body { 
-    background-color: #6285e7;
+    background-image: url('wallpaper.png');
+    background-size: cover;
 }
 
 .transparent-header-bg {
-    background: rgba(255, 255, 255, 0.671)
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(6px);
 }
 
 .white-bg {
@@ -46,14 +48,19 @@ header {
 
 .header-center-content {
     border-radius: 42px;
-    height: 45px;
-    background: rgba(32, 34, 151, 0.705);
-    backdrop-filter: blur(14px);
+    height: 66px;  
+    display: flex;
 }
 
-header h1 {
+header a {
     color: #fff;
+    font-weight: 600;
+    font-size: 46px;
 }
+header a:hover {
+    opacity: 0.7;
+}
+
 
 #logout {
     color: #ffffff;
@@ -66,15 +73,14 @@ header h1 {
 
 header button {
     color: #fff;
-    width: auto;
+    width: 190px;
     padding: 9px 50px;
     margin: 0 0;
     font-size: 20px;
     text-transform: uppercase;
     background-color: transparent;
-    font-weight: 200;
+    font-weight: 400;
     border: none;
-    transition: color 0.2s;
     display: inline-block;
 }
 
@@ -87,10 +93,9 @@ header button:hover {
     position: absolute;
     align-self: center;
     border-radius: 42px;
-    top: 25px;
     left: 0px;
-    height: 45px;
-    background: #0e144b;
+    height: 5px;
+    background: #9c6ac5;
     transition: transform 0.3s ease;
     z-index: -1;
 }
@@ -171,7 +176,7 @@ HOME GRID
     background: #fffeff;
     color: #000000;
     padding: 20px;  
-    border-radius: 22px;   
+    border-radius: 28px;   
     overflow: hidden;
     box-shadow: 3px 4px 12px rgba(0, 0, 0, 0.4);
 }
@@ -198,8 +203,7 @@ Grid child 2
     align-items: center;
     cursor: pointer;
     background: rgba(255, 255, 255, 0.30);
-    backdrop-filter: blur(10);
-    border: 1px solid rgba(255, 255, 255, 0.199);
+    backdrop-filter: blur(6px);
 }
 
 .grid-item:nth-child(2) img {
@@ -345,16 +349,36 @@ Grid child 5
     background: transparent;
 }
 
-.grid5-title {
-    padding: 20px;
+.grid-5-top {
+    display: flex;
 }
 
-.grid5-bottom {
-    padding: 20px;
+.grid5-mid {
+    padding: 10px 10px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     background-color: #fff;
+    overflow: auto;
+}
+
+.grid5-bottom {
+    padding: 20px 10px;
+    background-color: #fff;
+}
+
+.grid5-title {
+    padding: 20px;
+}
+
+.day-buttons{
+    display: flex;
+    align-self: center;
+    margin-left: auto;
+    padding-right: 20px;
+    font-size: 50px;
+    text-decoration: none;
+    color: #000;
 }
 
 .grid5-btn {
@@ -363,31 +387,68 @@ Grid child 5
 
 #product-list {
     padding-right: 15px;
-    margin: 25px 0;
+    margin: 10px 0;
     padding-top: 6px;
 }
 
 #product {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     padding-bottom: 24px;
     justify-content: space-between;
     font-size: 22px;
+    padding: 10px 8px;
+    border-radius: 8px;
 }
+
+#product:hover {
+    background-color: rgba(231, 231, 231, 0.411);
+}
+
+.product-name {
+    display: flex;
+    font-size: 25px;
+    text-transform: capitalize;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 18px;
+}
+
+.product-details p {
+    flex: 1;
+    margin-right: 12px;
+    text-align: left;
+}
+
 
 #product p {
-    overflow: auto;
+    position: relative;
+    overflow: hidden;
     margin: 0;
     flex: 1;
+    margin-right: 12px;
 }
 
+#product p:hover {
+    overflow: visible;
+}
+
+
 .delete-button {
-    background-color: red;
+    background-color: rgb(240, 4, 4);
+    align-self: flex-end;
+    border-radius: 0px;
     color: #fff;
     border: none;
-    padding: 5px 10px;
+    border-radius: 400px;
+    padding: 4px 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
+    font-weight: 800;
 }
 
 
@@ -527,7 +588,7 @@ add food pop up window
 .new-account-button {
     padding: 12px;
     margin-top: auto;
-    color: #7229e7;
+    color: #1580c7;
     font-size: 18px;
 }
 
@@ -585,7 +646,7 @@ add food pop up window
 .terug {
     margin-right: auto;
     margin-bottom: 34px;
-    color: #7229e7;
+    color: #1580c7;
 }
 .terug:hover {
     opacity: 0.6;

@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from itertools import groupby
+from operator import attrgetter
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
@@ -21,7 +24,7 @@ class FoodLog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(150), nullable=False)
     weight = db.Column(db.Float, nullable=False)
-    kcal = db.Column(db.Float, nullable=False)
+    kcal = db.Column(db.Float, nullable=False)  
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
 
@@ -32,9 +35,39 @@ def home():
         if user is None:
             session.pop('user_id', None)
             return redirect(url_for('login'))
-        food_logs = FoodLog.query.filter_by(user_id=user.id).all()
-        total_kcal = sum(food.kcal for food in food_logs)
-        return render_template('home.html', user=user, food_logs=food_logs, total_kcal=total_kcal)
+
+        current_date_str = request.args.get('current_date')
+        if current_date_str:
+            current_date = datetime.strptime(current_date_str, '%Y-%m-%d').date()
+        else:
+            current_date = datetime.now().date()
+
+        food_logs = FoodLog.query.filter_by(user_id=user.id).order_by(FoodLog.date_added.desc()).all()
+        
+        grouped_logs = {}
+        daily_kcal_totals = {}
+        grouped_by_date = groupby(food_logs, key=lambda x: x.date_added.date())
+        for date, items in grouped_by_date:
+            items_list = list(items)
+            grouped_logs[date] = items_list
+            daily_kcal_totals[date] = sum(food.kcal for food in items_list)
+
+        total_kcal = daily_kcal_totals.get(current_date, 0)
+
+        sorted_dates = sorted(grouped_logs.keys())
+        
+        current_index = sorted_dates.index(current_date) if current_date in sorted_dates else - 1
+        previous_date = sorted_dates[current_index - 1] if current_index > 0 else None
+        next_date = sorted_dates[current_index + 1] if current_index < len(sorted_dates) - 1 else None
+                                         
+        return render_template('home.html', user=user, 
+                               food_logs=food_logs, 
+                               grouped_logs=grouped_logs, 
+                               daily_kcal_totals=daily_kcal_totals, 
+                               current_date=current_date, 
+                               total_kcal=total_kcal,
+                               previous_date=previous_date,
+                               next_date=next_date)
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])

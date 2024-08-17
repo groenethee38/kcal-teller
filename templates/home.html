@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="static/css/style.css">
@@ -40,23 +38,24 @@
     <div class="main-content">
         <header>
             <div class="header-left">
-                <h1>Hallo {{ user.username }}</h1>
+                <a href="{{ url_for('home') }}">Hallo <span style="text-transform: capitalize">{{ user.username }}</span></a>
             </div>
             <div class="header-center">
                 <div class="header-center-content">
                     <div id="header-background"></div>
                     <button id="home-button" onclick="changeButton('home-button'); openTab('home');">Home</button>
-                    <button id="logs-button" onclick="changeButton('logs-button'); openTab('logs')" >Logs</button>
+                    <button id="logs-button" onclick="changeButton('logs-button'); openTab('logs')" >Data</button>
                     <button id="account-button" onclick="changeButton('account-button'); openTab('account')">Account</button>
                 </div>
             </div>
             <div class="header-right">
-                <a id="logout" href="{{ url_for('logout') }}">Uitloggen</a>
+                <a id="logout" href="{{ url_for('logout') }}">Log uit</a>
             </div>
         </header>
         <div id="home" class="tab-content active">
             <div class="home-grid">
-                <div id="grid1" class="grid-item"></div>
+                <div id="grid1" class="grid-item">
+                </div>
                 <div id="grid2" class="grid-item">
                     <h1>Nieuwe doel berekenen</h1>
                     <img src="static/css/rekenmachine.png">
@@ -71,22 +70,44 @@
                     <h2 id="percentage-text"></h2>
                 </div>
                 <div id="grid5" class="grid-item">
-                    <span class="transparent-header-bg">
+                    <div class="grid-5-top transparent-header-bg">
                         <h1 class="grid5-title">Vandaag</h1>
-                    </span>
-                    <div class="grid5-bottom">
-                        <div id="product-list">
-                            {% for food in food_logs %}
-                            <div id="product">
-                                <p id="name">{{ food.name }}</p>
-                                <p id="weight">{{ food.weight }}</p>
-                                <p id="kcal">{{ food.kcal }}</p>
-                                <form action="{{ url_for('delete_food', food_id=food.id) }}" method="POST" style="margin: 0;">
-                                    <button type="submit" class="delete-button">X</button>
-                                </form>
-                            </div>
-                            {% endfor %}
+                        <div class="day-buttons">
+                            {% if previous_date %}
+                            <a class="previous-day-btn" href="{{ url_for('home', current_date=previous_date.strftime('%Y-%m-%d')) }}">&#11207;</a>
+                            {% else %}
+                                <a class="previous-day-btn disabled" href="#">&#11207;</a>
+                            {% endif %}
+                            
+                            {% if next_date %}
+                                <a class="next-day-btn" href="{{ url_for('home', current_date=next_date.strftime('%Y-%m-%d')) }}">&#11208;</a>
+                            {% else %}
+                                <a class="next-day-btn disabled" href="#">&#11208;</a>
+                            {% endif %}
                         </div>
+                    </div>
+                    <div class="grid5-mid">
+                        {% for date, food_logs in grouped_logs.items() %}    
+                            <div id="product-list">
+                                <p>{{ date.strftime('%d-%m-%Y') }}</p>
+                                {% for food in food_logs %}
+                                <div id="product">
+                                    <div class="product-name">
+                                    <p id="name">{{ food.name }}</p>
+                                    <form action="{{ url_for('delete_food', food_id=food.id) }}" method="POST" style="margin: 0;">
+                                        <button type="submit" class="delete-button">&#10006;</button>
+                                    </form>
+                                    </div>
+                                    <div class="product-details">
+                                        <p id="weight">{{ food.weight|int }} gr</p>
+                                        <p id="kcal">{{ food.kcal|int }} kcal</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="grid5-bottom">
                         <button class="primary-button grid5-btn" onclick="openAddFood()">Voeg toe</button>
                     </div>
                 </div>
@@ -101,7 +122,7 @@
     </div>
     <script src="static/js/main.js"></script>
     <script>
-        var totalKcal = {{ total_kcal }};
-    </script>
-</body>
+        var currentDate = "{{ current_date.strftime('%Y-%m-%d') }}";
+        var totalKcal = {{ total_kcal }};</script>
+    </body>
 </html>
