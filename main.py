@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, timedelta
 from itertools import groupby
 from operator import attrgetter
 
@@ -42,20 +42,29 @@ def home():
         else:
             current_date = datetime.now().date()
 
-        food_logs = FoodLog.query.filter_by(user_id=user.id).order_by(FoodLog.date_added.desc()).all()
-        
+        end_date = datetime.now().date()
+        start_date = end_date - timedelta(days=180)
+
+        food_logs = FoodLog.query.filter_by(user_id=user.id).order_by(FoodLog.date_added.asc()).all()
+
+
         grouped_logs = {}
         daily_kcal_totals = {}
-        grouped_by_date = groupby(food_logs, key=lambda x: x.date_added.date())
-        for date, items in grouped_by_date:
-            items_list = list(items)
-            grouped_logs[date] = items_list
-            daily_kcal_totals[date] = sum(food.kcal for food in items_list)
+        date = start_date
 
+        while date <= end_date:
+            grouped_logs[date] = []
+            daily_kcal_totals[date] = 0
+            date += timedelta(days=1)
+
+        for log in food_logs:
+            log_date = log.date_added.date()
+            grouped_logs[log_date].append(log)
+            daily_kcal_totals[log_date] += log.kcal
+            
         total_kcal = daily_kcal_totals.get(current_date, 0)
 
         sorted_dates = sorted(grouped_logs.keys())
-        
         current_index = sorted_dates.index(current_date) if current_date in sorted_dates else - 1
         previous_date = sorted_dates[current_index - 1] if current_index > 0 else None
         next_date = sorted_dates[current_index + 1] if current_index < len(sorted_dates) - 1 else None

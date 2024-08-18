@@ -68,29 +68,29 @@
                     <canvas id="progressionChart"></canvas>
                     <h1 id="kcal-text"></h1>
                     <h2 id="percentage-text"></h2>
+                    <h3 id="date-text">{{ current_date.strftime('%d-%m-%Y') }}</h3>
                 </div>
                 <div id="grid5" class="grid-item">
                     <div class="grid-5-top transparent-header-bg">
-                        <h1 class="grid5-title">Vandaag</h1>
+                        <h1 class="grid5-title">{{ current_date.strftime('%d-%m-%Y') }}</h1>
                         <div class="day-buttons">
                             {% if previous_date %}
                             <a class="previous-day-btn" href="{{ url_for('home', current_date=previous_date.strftime('%Y-%m-%d')) }}">&#11207;</a>
                             {% else %}
-                                <a class="previous-day-btn disabled" href="#">&#11207;</a>
+                                <a class="previous-day-btn disabled">&#11207;</a>
                             {% endif %}
                             
                             {% if next_date %}
                                 <a class="next-day-btn" href="{{ url_for('home', current_date=next_date.strftime('%Y-%m-%d')) }}">&#11208;</a>
                             {% else %}
-                                <a class="next-day-btn disabled" href="#">&#11208;</a>
+                                <a class="next-day-btn disabled">&#11208;</a>
                             {% endif %}
                         </div>
                     </div>
-                    <div class="grid5-mid">
-                        {% for date, food_logs in grouped_logs.items() %}    
-                            <div id="product-list">
-                                <p>{{ date.strftime('%d-%m-%Y') }}</p>
-                                {% for food in food_logs %}
+                    <div class="grid5-mid">   
+                        <div id="product-list">
+                            {% if grouped_logs[current_date] %}
+                                {% for food in grouped_logs[current_date] %}
                                 <div id="product">
                                     <div class="product-name">
                                     <p id="name">{{ food.name }}</p>
@@ -104,8 +104,8 @@
                                     </div>
                                 </div>
                                 {% endfor %}
-                            </div>
-                        {% endfor %}
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="grid5-bottom">
                         <button class="primary-button grid5-btn" onclick="openAddFood()">Voeg toe</button>
@@ -123,6 +123,7 @@
     <script src="static/js/main.js"></script>
     <script>
         var currentDate = "{{ current_date.strftime('%Y-%m-%d') }}";
-        var totalKcal = {{ total_kcal }};</script>
+        var totalKcal = {{ total_kcal }};
+    </script>
     </body>
 </html>

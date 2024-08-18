@@ -42,16 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
       var targetKcal = parseInt(kcalDoel.textContent, 10);
       var percentage = (100 / targetKcal * kcal).toFixed(0);
 
-      if (progressionChart) {
       progressionChart.data.datasets[0].data[0] = percentage;
       progressionChart.data.datasets[0].data[1] = 100 - percentage;
       progressionChart.update();
-      } else {
-      initializeChart();
-      progressionChart.data.datasets[0].data[0] = percentage;
-      progressionChart.data.datasets[0].data[1] = 100 - percentage;
-      progressionChart.update();
-      }
       
       percentageText.textContent = percentage + "%";
       kcalText.textContent = kcal + " kcal";
@@ -60,15 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  changeDay = function(date, kcal) {
-    totalKcal = kcal;
-    updateChart(totalKcal);
-  }
-
-  if (totalKcal) {
-    initializeChart();
-    updateChart(totalKcal);
-  }
+  initializeChart();
+  updateChart(totalKcal || 0);  
 });
 
 
