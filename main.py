@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
-from itertools import groupby
-from operator import attrgetter
 
 
 app = Flask(__name__)
@@ -137,14 +135,17 @@ def add_food():
         weight = request.form['product-weight']
         kcal = request.form['product-kcal']
         user_id = session['user_id']
+        log_date = request.form['current_date']
 
-        new_food = FoodLog(name=name, weight=weight, kcal=kcal, user_id=user_id)
+        log_date_obj = datetime.strptime(log_date, '%Y-%m-%d')
+
+        new_food = FoodLog(name=name, weight=weight, kcal=kcal, user_id=user_id, date_added=log_date_obj)
         db.session.add(new_food)
         db.session.commit()
 
-        return redirect(url_for('home'))
+        return redirect(url_for('home', current_date=log_date))
     
-    return render_template('home.html')
+    return render_template(url_for('home'))
 
 @app.route('/delete-food/<int:food_id>', methods=['POST'])
 def delete_food(food_id):
@@ -155,10 +156,12 @@ def delete_food(food_id):
     if food.user_id != session['user_id']:
         return redirect(url_for('home'))
 
+    log_date = food.date_added.date()
+
     db.session.delete(food)
     db.session.commit()
     flash('Verwijderd')
-    return redirect(url_for('home'))
+    return redirect(url_for('home', current_date=log_date.strftime('%Y-%m-%d')))
 
 if __name__ == "__main__":
     with app.app_context():

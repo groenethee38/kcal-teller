@@ -31,6 +31,7 @@
                 <input name="product-weight" id="product-weight">
                 <label for="product-kcal">Kcal</label>
                 <input name="product-kcal" id="product-kcal">
+                <input type="hidden" name="current_date" value="{{ current_date.strftime('%Y-%m-%d') }}">
                 <button id="save-add-food">Opslaan</button>
             </form>
         </div>
@@ -89,22 +90,20 @@
                     </div>
                     <div class="grid5-mid">   
                         <div id="product-list">
-                            {% if grouped_logs[current_date] %}
-                                {% for food in grouped_logs[current_date] %}
-                                <div id="product">
-                                    <div class="product-name">
-                                    <p id="name">{{ food.name }}</p>
-                                    <form action="{{ url_for('delete_food', food_id=food.id) }}" method="POST" style="margin: 0;">
-                                        <button type="submit" class="delete-button">&#10006;</button>
-                                    </form>
-                                    </div>
-                                    <div class="product-details">
-                                        <p id="weight">{{ food.weight|int }} gr</p>
-                                        <p id="kcal">{{ food.kcal|int }} kcal</p>
-                                    </div>
+                            {% for food in grouped_logs[current_date] %}
+                            <div id="product">
+                                <div class="product-name">
+                                <p id="name">{{ food.name }}</p>
+                                <form action="{{ url_for('delete_food', food_id=food.id) }}" method="POST" style="margin: 0;">
+                                    <button type="submit" class="delete-button">&#10006;</button>
+                                </form>
                                 </div>
-                                {% endfor %}
-                            {% endif %}
+                                <div class="product-details">
+                                    <p id="weight">{{ food.weight|int }} gr</p>
+                                    <p id="kcal">{{ food.kcal|int }} kcal</p>
+                                </div>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="grid5-bottom">

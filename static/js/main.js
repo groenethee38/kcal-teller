@@ -9,15 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
   var kcalDoel = document.getElementById("kcal-doel");
   var kcalText = document.getElementById("kcal-text");
   var percentageText = document.getElementById("percentage-text");
-  var ctx = document.getElementById("progressionChart").getContext('2d');
+  var mainChart = document.getElementById("progressionChart").getContext('2d');
   var progressionChart = null;
 
   function initializeChart() {
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    const gradient = mainChart.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, '#510499');
     gradient.addColorStop(1, '#2041B6');
 
-    progressionChart = new Chart(ctx, {
+    progressionChart = new Chart(mainChart, {
       type: 'doughnut',
       data: {
         datasets: [{
@@ -79,12 +79,6 @@ function openTab(tabName) {
   }
 }
 
-
-/* ==========================================================================================
-
-Zie recept pop-up window
-
-========================================================================================== */
 
 /* ==========================================================================================
 
