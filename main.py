@@ -66,7 +66,12 @@ def home():
         current_index = sorted_dates.index(current_date) if current_date in sorted_dates else - 1
         previous_date = sorted_dates[current_index - 1] if current_index > 0 else None
         next_date = sorted_dates[current_index + 1] if current_index < len(sorted_dates) - 1 else None
-                                         
+        
+        if user.doel is None:
+            user.doel = 2000
+        else:
+            pass
+
         return render_template('home.html', user=user, 
                                food_logs=food_logs, 
                                grouped_logs=grouped_logs, 
