@@ -62,6 +62,11 @@ def home():
             
         total_kcal = daily_kcal_totals.get(current_date, 0)
 
+        daily_kcal_totals_str_keys = {}
+        for date, kcal in daily_kcal_totals.items():
+            date_str = date.strftime('%d-%m-%Y')
+            daily_kcal_totals_str_keys[date_str] = kcal
+
         sorted_dates = sorted(grouped_logs.keys())
         current_index = sorted_dates.index(current_date) if current_date in sorted_dates else - 1
         previous_date = sorted_dates[current_index - 1] if current_index > 0 else None
@@ -79,7 +84,8 @@ def home():
                                current_date=current_date, 
                                total_kcal=total_kcal,
                                previous_date=previous_date,
-                               next_date=next_date)
+                               next_date=next_date,
+                               daily_kcal_totals_str_keys=daily_kcal_totals_str_keys)
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])

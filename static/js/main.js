@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var kcalDoel = document.getElementById("kcal-doel");
   var kcalText = document.getElementById("kcal-text");
   var percentageText = document.getElementById("percentage-text");
-  var mainChart = document.getElementById("progressionChart").getContext('2d');
+  var mainChart = document.getElementById("progression-chart").getContext('2d');
   var progressionChart = null;
 
   function initializeChart() {
@@ -152,3 +152,72 @@ document.addEventListener("click", (event) => {
     closeAddFood();
   }
 })  
+
+
+
+
+
+/* ==========================================================================================
+
+Data
+
+========================================================================================== */
+
+function shortenDict(maxLength) {
+  let shortened = {}
+
+  let sortedKeys = Object.keys(dataDict).sort((a, b) => {
+    let dateA = new Date(a.split('-').reverse().join('-'));
+    let dateB = new Date(b.split('-').reverse().join('-'));
+    return dateA - dateB; 
+  });
+
+  let recentKeys = sortedKeys.slice(-maxLength);
+
+  for (let key of recentKeys) {
+    shortened[key] = dataDict[key];
+  }
+
+  return shortened;
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  var shorterDict = shortenDict(14);
+
+  var barChart = document.getElementById("bar-chart").getContext('2d');
+  var barColors = ["#386eb0", "#a053a6"]
+  var xVal = Object.keys(shorterDict);
+  var yVal = Object.values(shorterDict);
+
+  dataBarChart = new Chart(barChart, {
+    type: "bar",
+    data: {
+      labels: xVal,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yVal
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 0,
+          max: 2500,
+          grid: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            display: true
+          }
+        }
+      },
+      plugins: {
+        legend: {display: false},
+      }
+    }
+  });
+})

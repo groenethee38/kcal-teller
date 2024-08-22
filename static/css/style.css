@@ -670,16 +670,28 @@ add food pop up window
 
 /* 
 
-tab3
+tab DATA
 
 */
 
+.data {
+    margin: 60px 280px 0 280px;
+    padding: 15px;
+    border-radius: 24px;
+    background-color: #fffffff6;
+    display: flex;
+    justify-content: center;
+}
 
-
+#bar-chart {
+    width: 100%;
+    max-width: 800px;
+    max-height: 700px;
+}
 
 
 /* 
 
-tab3
+tab ACCOUNT
 
 */
