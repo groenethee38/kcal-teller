@@ -695,3 +695,40 @@ tab DATA
 tab ACCOUNT
 
 */
+
+@media (max-width: 768px) {
+    body {
+        background-size: auto;
+        overflow-x: hidden;
+    }
+
+    .tab-content {
+        padding: 0;
+    }
+
+    .header-center-content {
+        max-width: 350px;
+    }
+
+    header button {
+        padding: 0;
+        font-size: 16px;
+    }
+
+    .header-right,
+    .header-left {
+        display: none;
+    }
+
+    .header-center {
+        width: 100%;
+    }
+
+    .home-grid {
+        grid-template: repeat(2, 1fr);
+    }
+
+    .data {
+        margin: 0 10px;
+    }
+}
