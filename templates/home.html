@@ -114,11 +114,21 @@
             </div>
         </div>
         <div id="data" class="tab-content">
+            <div class="data-buttons">
+                <button id="6maanden" >6 maanden</button>
+                <button id="1maand">1 maand</button>
+                <button id="1week">1 week</button>
+            </div>
             <div class="data">
                 <canvas id="bar-chart"></canvas>
             </div>
         </div>
         <div id="account" class="tab-content">
+            <div class="account-settings">
+                <h1>Account</h1>
+                <p>username: {{ user.username }}</p>
+                <p>email: {{ user.email}}</p>
+            </div>
         </div>
     </div>
     <script src="static/js/main.js"></script>

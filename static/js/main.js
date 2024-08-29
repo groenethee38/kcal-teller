@@ -183,20 +183,16 @@ function shortenDict(maxLength) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  var shorterDict = shortenDict(14);
-
   var barChart = document.getElementById("bar-chart").getContext('2d');
   var barColors = ["#386eb0", "#a053a6"]
-  var xVal = Object.keys(shorterDict);
-  var yVal = Object.values(shorterDict);
 
   dataBarChart = new Chart(barChart, {
     type: "bar",
     data: {
-      labels: xVal,
+      labels: Object.keys(shortenDict(14)),
       datasets: [{
         backgroundColor: barColors,
-        data: yVal
+        data: Object.values(shortenDict(14))
       }]
     },
     options: {
@@ -220,4 +216,22 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+})
+
+function updateChart(maxLength) {
+  var newDict = shortenDict(maxLength);
+
+  dataBarChart.data.labels = Object.keys(newDict);
+  dataBarChart.data.datasets[0].data = Object.values(newDict);
+  dataBarChart.update();
+}
+
+document.getElementById('6maanden').addEventListener('click', function() {
+  updateChart(365);
+})
+document.getElementById('1maand').addEventListener('click', function() {
+  updateChart(30);
+})
+document.getElementById('1week').addEventListener('click', function() {
+  updateChart(7);
 })
