@@ -569,7 +569,10 @@ add food pop up window
 .login-page {
     height: 450px;
     width: 325px;
-    background-color: #fff;
+    background-color: #49494910;
+    backdrop-filter: blur(16px);
+    border: 1px solid #46464642;
+    box-shadow: 0 8px 22px 0 #00000096;
     border-radius: 22px;
     padding: 14px;
     margin: auto;
@@ -581,13 +584,15 @@ add food pop up window
 
 .login-page h1 {
     margin-bottom: 15px;
+    color: #fff;
 }
 
 .login-page input {
     width: 100%;
     margin-bottom: 18px;
     border: none;
-    background-color: #d4d4d4;
+    color: #b6b6b6;
+    background-color: #41414142;
     padding: 12px;
     border-radius: 8px;
 }
@@ -596,10 +601,12 @@ add food pop up window
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    font-weight: 600;
     border-radius: 99px;
     border: none;
     background-color: #000;
     color: #fff;
+    text-transform: uppercase;
 }
 
 .login-page button:hover {
@@ -654,6 +661,8 @@ add food pop up window
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
     border-radius: 99px;
     border: none;
     background-color: #000;
