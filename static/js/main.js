@@ -189,10 +189,10 @@ document.addEventListener("DOMContentLoaded", function () {
   dataBarChart = new Chart(barChart, {
     type: "bar",
     data: {
-      labels: Object.keys(shortenDict(14)),
+      labels: Object.keys(shortenDict(7)),
       datasets: [{
         backgroundColor: barColors,
-        data: Object.values(shortenDict(14))
+        data: Object.values(shortenDict(7))
       }]
     },
     options: {
@@ -228,10 +228,19 @@ function updateChart(maxLength) {
 
 document.getElementById('6maanden').addEventListener('click', function() {
   updateChart(365);
+  document.getElementById('6maanden').style.boxShadow = 'inset 2px 2px 8px #00000034';
+  document.getElementById('1maand').style.boxShadow = 'none';
+  document.getElementById('1week').style.boxShadow = 'none';
 })
 document.getElementById('1maand').addEventListener('click', function() {
   updateChart(30);
+  document.getElementById('6maanden').style.boxShadow = 'none';
+  document.getElementById('1maand').style.boxShadow = 'inset 2px 2px 8px #00000034';
+  document.getElementById('1week').style.boxShadow = 'none';
 })
 document.getElementById('1week').addEventListener('click', function() {
   updateChart(7);
+  document.getElementById('6maanden').style.boxShadow = 'none';
+  document.getElementById('1maand').style.boxShadow = 'none';
+  document.getElementById('1week').style.boxShadow = 'inset 2px 2px 8px #00000034';
 })
