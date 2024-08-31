@@ -77,10 +77,13 @@ def home():
         else:
             pass
 
+        today = datetime.now().date()
+
         return render_template('home.html', user=user, 
                                food_logs=food_logs, 
                                grouped_logs=grouped_logs, 
                                daily_kcal_totals=daily_kcal_totals, 
+                               today=today,
                                current_date=current_date, 
                                total_kcal=total_kcal,
                                previous_date=previous_date,

@@ -74,7 +74,11 @@
                 </div>
                 <div id="grid5" class="grid-item">
                     <div class="grid-5-top transparent-header-bg">
-                        <h1 class="grid5-title">{{ current_date.strftime('%d-%m-%Y') }}</h1>
+                        {% if current_date == today %}
+                            <h1 class="grid5-title">Vandaag</h1>
+                        {% else %}
+                            <h1 class="grid5-title">{{ current_date.strftime('%d-%m-%Y') }}</h1>
+                        {% endif %}
                         <div class="day-buttons">
                             {% if previous_date %}
                             <a class="previous-day-btn" href="{{ url_for('home', current_date=previous_date.strftime('%Y-%m-%d')) }}">&#11207;</a>

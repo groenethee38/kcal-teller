@@ -386,8 +386,14 @@ Grid child 5
     margin-left: auto;
     padding-right: 20px;
     font-size: 50px;
-    text-decoration: none;
+}
+
+.day-buttons a {
     color: #000;
+}
+
+.day-buttons a:hover:not(.disabled) {
+    opacity: 0.6;
 }
 
 .grid5-btn {
@@ -569,9 +575,9 @@ add food pop up window
 .login-page {
     height: 450px;
     width: 325px;
-    background-color: #49494910;
+    background-color: #61606023;
     backdrop-filter: blur(16px);
-    border: 1px solid #46464642;
+    border: 1px solid #2c2c2c42;
     box-shadow: 0 8px 22px 0 #00000096;
     border-radius: 22px;
     padding: 14px;
